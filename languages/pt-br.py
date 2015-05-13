@@ -1,4 +1,4 @@
-# coding: utf8
+# -*- coding: utf-8 -*-
 {
 '': '',
 ' e se diferencia da concorrência.': ' e se diferencia da concorrência.',
@@ -137,6 +137,7 @@
 'Email sent': 'Email enviado',
 'Emirates': 'Emirates',
 'enter a valid email address': 'enter a valid email address',
+'Enter an integer between %(min)g and %(max)g': 'Enter an integer between %(min)g and %(max)g',
 'enter an integer between %(min)g and %(max)g': 'enter an integer between %(min)g and %(max)g',
 'Entrar': 'Entrar',
 'Entrar com Facebook': 'Entrar com Facebook',
@@ -160,6 +161,7 @@
 'Exportar Canvas em PDF.': 'Exportar Canvas em PDF.',
 'Exportar PDF': 'Exportar PDF',
 'Exportar PNG': 'Exportar PNG',
+'Exportar TXT': 'Exportar TXT',
 'Facebook, appstores, comunidade dos jogos e lojas que vendem cartão pré-pago Zynga.': 'Facebook, appstores, comunidade dos jogos e lojas que vendem cartão pré-pago Zynga.',
 'FAQ': 'FAQ',
 'Faça login na sua conta': 'Faça login na sua conta',
@@ -223,6 +225,7 @@
 'List actions/tasks important that your company must meet as a Value Proposition and Business Model to your work.': 'Liste ações/tarefas importantes que sua empresa deve atender conforme a Proposta de Valor e para fazer seu Modelo de Negócio funcionar.',
 'Live chat': 'Live chat',
 'Live Chat': 'Live Chat',
+'Log In': 'Log In',
 'Logged in': 'Logged in',
 'Logged out': 'Logged out',
 'Login': 'Autentique-se',

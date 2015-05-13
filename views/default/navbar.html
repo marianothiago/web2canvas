@@ -34,9 +34,11 @@
                     {{ pass }}
 
                     {{ if not auth.is_logged_in(): }}
-                    <li>
-                        <a class="btn-header" href="{{=URL(f='user',args='register')}}">{{=T('Cadastre-se')}}</a>
-                    </li>
+                        {{if not 'register' in auth.settings.actions_disabled:}}
+                            <li>
+                                <a class="btn-header" href="{{=URL(f='user',args='register')}}">{{=T('Cadastre-se')}}</a>
+                            </li>
+                        {{ pass }}
                     <li>
                         <a class="btn-header" href="{{=URL(f='user',args='login')}}">{{=T('Entrar')}}</a>
                     </li>
@@ -48,15 +50,17 @@
                         <a class="btn btn-inverse" href="#"><i class="icon-user icon-white"></i> <b>{{=auth.user.first_name}}</b></a>
                         <a class="btn btn-inverse dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
                         <ul class="dropdown-menu">
+                            {{if not 'register' in auth.settings.actions_disabled:}}
+                                <li>
+                                    <a href="{{=URL(f='user',args='profile',vars={'_next':'index'})}}"><i class="icon-user"></i> {{=T('Perfil')}}</a>
+                                </li>
+                                <li>
+                                    <a href="{{=URL(f='user',args='change_password',vars={'_next':'index'})}}"><i class="icon-lock"></i> {{=T('Senha')}}</a>
+                                </li>
+                                <li class="divider"></li>
+                            {{ pass }}
                             <li>
-                                <a href="{{=URL(f='user',args='profile',vars={'_next':'index'})}}"><i class="icon-user"></i> {{=T('Perfil')}}</a>
-                            </li>
-                            <li>
-                                <a href="{{=URL(f='user',args='change_password',vars={'_next':'index'})}}"><i class="icon-lock"></i> {{=T('Senha')}}</a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a href="{{=URL(f='user',args='logout',vars={'_next':'index'})}}"><i class="icon-off"></i> {{=T('Sair')}}</a>
+                                <a href="{{=URL(f='user',args='logout',vars={'_next':''})}}"><i class="icon-off"></i> {{=T('Sair')}}</a>
                             </li>
                         </ul>
 

@@ -43,6 +43,16 @@ from gluon.tools import Auth, Crud, Service, PluginManager, prettydate, Mail
 auth = Auth(db)
 crud, service, plugins = Crud(db), Service(), PluginManager()
 
+auth.settings.create_user_groups=False
+auth.settings.actions_disabled=['register','change_password','request_reset_password','retrieve_username','profile']
+auth.settings.remember_me_form = False
+
+from gluon.contrib.login_methods.ldap_auth import ldap_auth
+auth.settings.login_methods = [ldap_auth(mode='cn',
+server='127.0.0.1',
+port='389',
+base_dn='DC=tlmariano,DC=com')]
+
 ## create all tables needed by auth if not custom tables
 
 auth.settings.extra_fields['auth_user']= [
@@ -122,7 +132,7 @@ from gluon.contrib.login_methods.rpx_account import use_janrain
 use_janrain(auth, filename='private/janrain.key')
 
 # forço o login apenas com email
-auth.settings.login_userfield = 'email'
+#auth.settings.login_userfield = 'email'
 
 if session.auth_with:
     if session.auth_with == 'facebook':

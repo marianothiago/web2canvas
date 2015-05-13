@@ -29,6 +29,10 @@ def projetos():
     from datetime import datetime
 
     pessoa = db((Pessoa.usuario1==auth.user.id) | (Pessoa.usuario2==auth.user.id)).select().first()
+    if not pessoa:
+        if auth.settings.login_methods[0].__name__ == "ldap_auth_aux":
+            Pessoa.insert(nome=auth.user.username,usuario1=auth.user.id)
+            pessoa = db((Pessoa.usuario1==auth.user.id) | (Pessoa.usuario2==auth.user.id)).select().first()
     meus_projetos = db(Projeto.criado_por==pessoa.id).select()
     projetos_colaborador = db(Compartilhamento.pessoa_id==pessoa.id).select()
 
