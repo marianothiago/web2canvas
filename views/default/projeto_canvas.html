@@ -448,7 +448,7 @@
     <span class="guia-btn-icon-left"><span></span></span>
 </a>
 
-<!-- verifico se algum bloco possui cartao -->
+<!-- verifico se algum bloco possui cartao 
 {{ for i in range(1,10): }}
     {{ if tem_cartao["bloco%d"%i] == True: }}
         <script>var chama_guia = false;</script>
@@ -456,16 +456,15 @@
     {{ else: }}
         <script>var chama_guia = true;</script>
     {{ pass }}
-{{ pass }}
+{{ pass }}-->
+
+<script>var chama_guia = false;</script>
 
 <!-- Tip Content -->
 <ol id="joyRideTipContent">
   <li data-button="Próximo">
       <h2>{{=T('Já conhece o Modelo Canvas?')}}</h2>
     <p>{{=T('Então vamos conhecer os recursos do seu projeto Canvas.')}}</p>
-    <small>{{=T('(Você pode parar o guia fechando essa janela)')}}</small>
-    <br>
-    <br>
   </li>
   <li data-class="parcerias_principais" data-text="Próximo">
     <h2>#1</h2>

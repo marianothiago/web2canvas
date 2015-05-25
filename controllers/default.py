@@ -46,7 +46,6 @@ def projetos():
 
     if form.accepts(request.vars):
         fname = _converterImagem(form.vars.thumbnail,folder)
-
         Projeto.insert(
                         nome=form.vars.nome,
                         criado_por=pessoa.id,
@@ -81,7 +80,7 @@ def _converterImagem(base64txt,folder):
         os.remove(uploadfolder+base64txt)
         return fname
     else:
-        return False
+        return None
 
 
 @auth.requires_login()
@@ -94,12 +93,12 @@ def excluir_projeto():
     projeto_id = request.vars['projeto_id'] or redirect(URL('index'))
     projeto = db(Projeto.id==projeto_id).select().first()
     pessoa = db((Pessoa.usuario1==auth.user.id) | (Pessoa.usuario2==auth.user.id)).select().first()
-
     if projeto:
         if pessoa.id == projeto.criado_por:
             db(Projeto.id==projeto_id).delete()
             # Deleta a imagem do projeto
-            subprocess.call('rm %s/%s' % (diretorio_upload, projeto.thumbnail), shell=True)
+            if projeto.thumbnail != None:
+                subprocess.call('rm %s/%s' % (diretorio_upload, projeto.thumbnail), shell=True)
 
     redirect(URL('projetos'))
 
@@ -113,7 +112,6 @@ def projeto_canvas():
     session.projeto_id = projeto_id
     pessoa = db((Pessoa.usuario1==auth.user.id) | (Pessoa.usuario2==auth.user.id)).select().first()
     pessoas_autorizadas =  [i.criado_por for i in db(Projeto.id==projeto_id).select()]
-
     for i in db(Compartilhamento.projeto_id==projeto_id).select():
         if not i.pessoa_id in pessoas_autorizadas:
             pessoas_autorizadas.append(i.pessoa_id)
@@ -124,7 +122,10 @@ def projeto_canvas():
         id_time = [i.pessoa_id for i in time_compartilhamento]
         id_time.append(projeto.criado_por)
 
-        usuarios_para_adicionar = {i.nome:i.id for i in db(db.pessoa).select() if not i.id in id_time}
+        usuarios_para_adicionar = {}
+        for i in db(db.pessoa).select():
+            if not i.id in id_time:
+                usuarios_para_adicionar.update({i.nome:i.id})
 
         usuario_dados = _email_usuarios(projeto.criado_por.id)
 

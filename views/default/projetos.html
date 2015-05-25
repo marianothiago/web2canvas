@@ -1,15 +1,18 @@
 {{extend 'default/layout_base.html'}}
 
+
 {{ if meus_projetos: }}
     {{ len_meus_projetos = len(meus_projetos) }}
-    <script>
+    <!-- <script>
         var chama_guia = false;
     </script>
 {{ else: }}
     <script>
         var chama_guia = true;
-    </script>
+    </script>-->
 {{ pass }}
+
+<script>var chama_guia = false;</script>
 
 {{ if projetos_colaborador: }}
     {{ len_colaborador = len(projetos_colaborador) }}
